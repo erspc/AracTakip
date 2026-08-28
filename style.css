@@ -1,0 +1,522 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f4f6;
+    color: #111827;
+}
+
+header {
+    background: #111827;
+    color: white;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+header h1 {
+    margin: 0 0 15px;
+    font-size: 24px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+main {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 25px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    background: #111827;
+    color: white;
+    font-weight: bold;
+}
+
+.company-card,
+.vehicle-card,
+.empty-card,
+.result-card,
+.search-card,
+.inside-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.company-card h3 {
+    margin-top: 0;
+}
+
+.vehicle-card,
+.staff-card,
+.assigned-staff-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.vehicle-card .card-actions,
+.assigned-staff-card .card-actions {
+    margin-top: 0;
+}
+
+.edit-btn {
+    background: #374151;
+}
+
+.delete-btn {
+    background: #dc2626;
+}
+
+.back-btn {
+    margin-bottom: 15px;
+}
+
+.detail-header {
+    background: white;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 20px;
+}
+
+.detail-section {
+    margin-bottom: 25px;
+}
+
+.note-box {
+    background: #f9fafb;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 22px;
+    border-radius: 14px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    background: transparent;
+    color: #111827;
+    font-size: 25px;
+}
+
+.modal-content label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.modal-content textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.save-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.result-card {
+    cursor: pointer;
+    border-left: 4px solid #111827;
+}
+
+.search-card,
+.inside-card {
+    cursor: pointer;
+}
+
+.search-card {
+    border-left: 4px solid #111827;
+}
+
+.inside-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.result-card small {
+    color: #6b7280;
+}
+
+a {
+    color: #111827;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.empty-card {
+    color: #6b7280;
+}
+
+@media (max-width: 600px) {
+
+    main {
+        padding: 14px;
+    }
+
+    .section-header {
+        align-items: flex-start;
+    }
+
+    .vehicle-card,
+    .card-actions {
+        width: 100%;
+    }
+
+    .card-actions button {
+        flex: 1;
+    }
+}
+
+.enter-btn {
+    background: #16a34a;
+    margin-top: 10px;
+}
+
+.exit-btn {
+    background: #dc2626;
+    margin-top: 10px;
+}
+
+.vehicle-actions {
+    margin-top: 10px;
+}
+
+.status-inside {
+    margin-top: 10px;
+    padding: 10px;
+    background: #ecfdf5;
+    border-radius: 8px;
+}
+
+.status-outside {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f3f4f6;
+    border-radius: 8px;
+}
+
+.history {
+    margin-top: 15px;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 12px;
+}
+
+.company-status {
+    margin-top: 15px;
+    padding: 14px;
+    border-radius: 10px;
+}
+
+.company-status small {
+    display: block;
+    margin-top: 6px;
+}
+
+.company-status button {
+    margin-top: 10px;
+}
+
+.company-status.inside {
+    background: #ecfdf5;
+}
+
+.company-status.outside {
+    background: #f3f4f6;
+}
+
+.visit-history {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.visit-history summary {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.history-list {
+    margin-top: 12px;
+}
+
+.history-item {
+    padding: 10px;
+    margin-top: 8px;
+    background: #f9fafb;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+body.dark {
+    background: #111827;
+    color: #f9fafb;
+}
+
+body.dark .company-card,
+body.dark .vehicle-card,
+body.dark .empty-card,
+body.dark .result-card,
+body.dark .search-card,
+body.dark .inside-card,
+body.dark .detail-header,
+body.dark .modal-content,
+body.dark .visit-history {
+    background: #1f2937;
+    color: #f9fafb;
+}
+
+body.dark .note-box,
+body.dark .history-item {
+    background: #374151;
+}
+
+body.dark .status-outside,
+body.dark .company-status.outside {
+    background: #374151;
+}
+
+body.dark .status-inside,
+body.dark .company-status.inside {
+    background: #064e3b;
+}
+
+body.dark .modal-content input,
+body.dark .modal-content textarea,
+body.dark .search-box input {
+    background: #374151;
+    color: #f9fafb;
+    border-color: #6b7280;
+}
+
+body.dark .modal-content input::placeholder,
+body.dark .modal-content textarea::placeholder,
+body.dark .search-box input::placeholder {
+    color: #d1d5db;
+}
+
+body.dark a {
+    color: #93c5fd;
+}
+
+body.dark .empty-card,
+body.dark .result-card small {
+    color: #d1d5db;
+}
+
+body.dark .close {
+    color: #f9fafb;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.live-date-time {
+    min-width: 132px;
+    color: #d1d5db;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.staff-card,
+.assigned-staff-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.staff-card,
+.assigned-staff-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.staff-card-info {
+    min-width: 0;
+}
+
+.staff-card-info > * {
+    margin-bottom: 6px;
+}
+
+.staff-card-info p {
+    margin-top: 8px;
+}
+
+.call-btn,
+.secondary-button,
+.remove-button {
+    display: inline-block;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.call-btn {
+    background: #16a34a;
+    color: white;
+}
+
+.secondary-button {
+    background: #374151;
+    color: white;
+}
+
+.remove-button {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+.staff-assignment-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.staff-assignment-form select {
+    min-width: 220px;
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    background: white;
+}
+
+body.dark .staff-card,
+body.dark .assigned-staff-card,
+body.dark .staff-assignment-form select {
+    background: #1f2937;
+    color: #f9fafb;
+    border-color: #6b7280;
+}
+
+body.dark .remove-button {
+    background: #374151;
+    color: #f9fafb;
+}
+
+@media (max-width: 600px) {
+
+    .live-date-time {
+        min-width: 0;
+        font-size: 11px;
+    }
+
+    .staff-card,
+    .assigned-staff-card {
+        flex-direction: column;
+    }
+
+    .staff-card .card-actions,
+    .assigned-staff-card .card-actions {
+        width: 100%;
+    }
+
+    .staff-card .card-actions > *,
+    .assigned-staff-card .card-actions > * {
+        flex: 1;
+        text-align: center;
+    }
+
+    .staff-assignment-form {
+        flex-direction: column;
+    }
+
+    .staff-assignment-form select,
+    .staff-assignment-form button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#111827"
+    >
+
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <title>Firma Takip</title>
+
+</head>
+
+
+<body>
+
+<header>
+
+    <div class="header-top">
+
+        <div>
+
+            <h1>🚐 Firma Takip</h1>
+
+            <p>
+                Firma ve giriş-çıkış yönetimi
+            </p>
+
+        </div>
+
+        <div class="header-actions">
+
+            <div
+                id="liveDateTime"
+                class="live-date-time"
+                aria-live="polite"
+            ></div>
+
+            <button
+                class="settings-button"
+                onclick="openSettings()"
+            >
+                ⚙️
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="search-box">
+
+        <span>🔎</span>
+
+        <input
+            id="searchInput"
+            type="search"
+            placeholder="Firma, plaka, kişi veya telefon ara..."
+            autocomplete="off"
+        >
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <!-- ARAMA SONUÇLARI -->
+
+    <section
+        id="searchResultsSection"
+        class="section hidden"
+    >
+
+        <div class="section-header">
+
+            <h2>🔎 Sonuçlar</h2>
+
+            <button
+                class="small-button"
+                onclick="clearSearch()"
+            >
+                Temizle
+            </button>
+
+        </div>
+
+        <div id="searchResults"></div>
+
+    </section>
+
+
+    <!-- ANA SAYFA -->
+
+    <section id="homeSection">
+
+        <!-- İÇERİDEKİLER -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <h2>
+                    🟢 Şu Anda İçeride
+                </h2>
+
+                <span
+                    id="insideCount"
+                    class="count-badge"
+                >
+                    0
+                </span>
+
+            </div>
+
+            <div id="insideCompanies"></div>
+
+        </section>
+
+
+        <!-- FİRMALAR -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <h2>🏢 Firmalar</h2>
+
+                <button
+                    onclick="openCompanyForm()"
+                >
+                    + Firma Ekle
+                </button>
+
+            </div>
+
+            <div
+                id="companiesContainer"
+            ></div>
+
+        </section>
+
+
+        <!-- OTEL GÖREVLİLERİ -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <h2>📞 Otel Görevlileri</h2>
+
+                <button
+                    onclick="openHotelStaffForm()"
+                >
+                    + Görevli Ekle
+                </button>
+
+            </div>
+
+            <div id="hotelStaffContainer"></div>
+
+        </section>
+
+    </section>
+
+
+    <!-- FİRMA DETAY -->
+
+    <section
+        id="companyDetailSection"
+        class="section hidden"
+    >
+
+        <button
+            class="back-btn"
+            onclick="showHome()"
+        >
+            ← Geri
+        </button>
+
+
+        <div id="companyDetail"></div>
+
+    </section>
+
+
+</main>
+
+
+<!-- ========================= -->
+<!-- FİRMA MODAL -->
+<!-- ========================= -->
+
+<div
+    id="companyModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <button
+            class="close"
+            onclick="closeModal('companyModal')"
+        >
+            ×
+        </button>
+
+
+        <h2 id="companyFormTitle">
+            Firma Ekle
+        </h2>
+
+
+        <input
+            type="hidden"
+            id="companyId"
+        >
+
+
+        <label>
+            Firma Adı
+        </label>
+
+        <input
+            id="companyName"
+            type="text"
+            placeholder="Örn: ABC Turizm"
+        >
+
+
+        <label>
+            Firma Dipnotu
+        </label>
+
+        <textarea
+            id="companyNote"
+            placeholder="Firma hakkında not..."
+        ></textarea>
+
+
+        <button
+            class="save-btn"
+            onclick="saveCompany()"
+        >
+            Kaydet
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- ARAÇ MODAL -->
+<!-- ========================= -->
+
+<div
+    id="vehicleModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <button
+            class="close"
+            onclick="closeModal('vehicleModal')"
+        >
+            ×
+        </button>
+
+
+        <h2>
+            🚐 Araç Ekle
+        </h2>
+
+
+        <input
+            type="hidden"
+            id="vehicleId"
+        >
+
+
+        <label>
+            Plaka
+        </label>
+
+        <input
+            id="vehiclePlate"
+            type="text"
+            placeholder="Örn: 07 ABC 123"
+        >
+
+
+        <label>
+            Araç Dipnotu
+        </label>
+
+        <textarea
+            id="vehicleNote"
+            placeholder="Araç hakkında not..."
+        ></textarea>
+
+
+        <button
+            class="save-btn"
+            onclick="saveVehicle()"
+        >
+            Kaydet
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- OTEL GÖREVLİSİ MODAL -->
+<!-- ========================= -->
+
+<div
+    id="hotelStaffModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <button
+            class="close"
+            onclick="closeModal('hotelStaffModal')"
+        >
+            ×
+        </button>
+
+        <h2>
+            📞 Otel Görevlisi
+        </h2>
+
+        <input
+            type="hidden"
+            id="hotelStaffId"
+        >
+
+        <label>
+            Ad Soyad
+        </label>
+
+        <input
+            id="hotelStaffName"
+            type="text"
+            placeholder="Örn: Ahmet Yılmaz"
+        >
+
+        <label>
+            Görev / Departman
+        </label>
+
+        <input
+            id="hotelStaffDepartment"
+            type="text"
+            placeholder="Örn: Ön Büro"
+        >
+
+        <label>
+            Telefon
+        </label>
+
+        <input
+            id="hotelStaffPhone"
+            type="tel"
+            placeholder="05XX XXX XX XX"
+        >
+
+        <label>
+            Özel Dipnot
+        </label>
+
+        <textarea
+            id="hotelStaffNote"
+            placeholder="Görevli hakkında not..."
+        ></textarea>
+
+        <button
+            class="save-btn"
+            onclick="saveHotelStaff()"
+        >
+            Kaydet
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- AYARLAR -->
+<!-- ========================= -->
+
+<div
+    id="settingsModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <button
+            class="close"
+            onclick="closeModal('settingsModal')"
+        >
+            ×
+        </button>
+
+
+        <h2>
+            ⚙️ Ayarlar
+        </h2>
+
+
+        <div class="settings-item">
+
+            <div>
+
+                <strong>
+                    🌙 Koyu Tema
+                </strong>
+
+                <small>
+                    Uygulamanın görünümünü değiştirir.
+                </small>
+
+            </div>
+
+
+            <button
+                id="themeButton"
+                onclick="toggleTheme()"
+            >
+                🌙 Aç
+            </button>
+
+        </div>
+
+
+        <div class="settings-item">
+
+            <div>
+
+                <strong>
+                    💾 Verileri Yedekle
+                </strong>
+
+                <small>
+                    Tüm verilerini dosya olarak kaydet.
+                </small>
+
+            </div>
+
+
+            <button
+                onclick="exportData()"
+            >
+                Yedekle
+            </button>
+
+        </div>
+
+
+        <div class="settings-item">
+
+            <div>
+
+                <strong>
+                    ♻️ Yedekten Geri Yükle
+                </strong>
+
+                <small>
+                    Daha önce oluşturduğun yedeği yükle.
+                </small>
+
+            </div>
+
+
+            <button
+                onclick="document.getElementById('importFile').click()"
+            >
+                Yükle
+            </button>
+
+        </div>
+
+
+        <input
+            id="importFile"
+            type="file"
+            accept=".json"
+            hidden
+            onchange="importData(event)"
+        >
+
+    </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
